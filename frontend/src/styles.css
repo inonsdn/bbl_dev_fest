@@ -1,0 +1,225 @@
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --gray: #6b7280;
+  --gray-dark: #4b5563;
+  --red: #dc2626;
+  --red-dark: #b91c1c;
+  --border: #e5e7eb;
+  --bg: #f3f4f6;
+  --text: #111827;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 720px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 28px;
+}
+
+.auth-card {
+  max-width: 400px;
+  margin: 40px auto 0;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--gray-dark);
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  cursor: pointer;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+button:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+button.secondary {
+  background: var(--gray);
+}
+
+button.secondary:hover:not(:disabled) {
+  background: var(--gray-dark);
+}
+
+button.danger {
+  background: var(--red);
+}
+
+button.danger:hover:not(:disabled) {
+  background: var(--red-dark);
+}
+
+.auth-card button[type="submit"] {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.error {
+  color: var(--red);
+  font-size: 14px;
+  margin: 12px 0 0;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 20px;
+  text-align: center;
+}
+
+code {
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--gray-dark);
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-admin {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.slot-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.slot-form input {
+  margin-top: 0;
+  flex: 1;
+}
+
+.slot-form button {
+  white-space: nowrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+}
+
+.actions-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.row-btn {
+  padding: 5px 12px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+td input {
+  margin: 0;
+  padding: 6px 8px;
+}
+
+.muted {
+  color: var(--gray);
+  font-size: 14px;
+}

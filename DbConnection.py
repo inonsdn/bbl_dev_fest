@@ -42,8 +42,10 @@ class DbConnection:
     def mock(self):
         adminId = uuid4().bytes
         user1 = uuid4().bytes
+        user2 = uuid4().bytes
         self.userIdToUserInfoDict[ adminId ] = UserModel( adminId, 'admin', 'admin', isAdmin=True )
         self.userIdToUserInfoDict[ user1 ] = UserModel( user1, 'user1', 'test1234', isAdmin=False )
+        self.userIdToUserInfoDict[ user2 ] = UserModel( user2, 'user2', 'test1234', isAdmin=False )
 
     def createUser( self, userId: bytes, username, password, isAdmin=False ):
         if userId in self.userIdToUserInfoDict:
