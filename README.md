@@ -16,3 +16,9 @@ test with command line
 ```
 ./test_script.sh
 ```
+
+run frontend
+```
+cd frontend
+npm run dev
+```
