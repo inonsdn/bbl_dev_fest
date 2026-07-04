@@ -13,7 +13,7 @@ class Token:
 
 
 class UserModel:
-    def __init__( self, userId, username, password, isAdmin=False, token: Token = None ):
+    def __init__( self, userId: bytes, username, password, isAdmin=False, token: Token = None ):
         self.userId = userId
         self.username = username
         self.password = password
@@ -37,18 +37,19 @@ class DbConnection:
         self.tokenToUserInfoDict: dict[str, UserModel] = dict()
         self.appointmentIdToAppointmentDict: dict[bytes, Appointment] = dict()
 
-    def createUser( self, userId: bytes, username, password, isAdmin=False ):
-        '''
-        '''
+    def mock(self):
+        adminId = uuid4().bytes
+        user1 = uuid4().bytes
+        self.userIdToUserInfoDict[ adminId ] = UserModel( adminId, 'admin', 'admin', isAdmin=True )
+        self.userIdToUserInfoDict[ user1 ] = UserModel( user1, 'user1', 'test1234', isAdmin=False )
 
+    def createUser( self, userId: bytes, username, password, isAdmin=False ):
         if userId in self.userIdToUserInfoDict:
             raise ValueError( f'User id {userId} is already exist' )
 
         self.userIdToUserInfoDict[ userId ] = UserModel( userId, username, password, isAdmin )
 
     def getUserFromUsernameAndPassword( self, username: str, password ) -> UserModel:
-        '''
-        '''
         user = None
         for userId, userObj in self.userIdToUserInfoDict.items():
             if userObj.username == username and userObj.password == password:

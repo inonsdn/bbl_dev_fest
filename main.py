@@ -63,7 +63,6 @@ def getUserFromAuthorization( authorization: str = Header(None) ):
 
 	return userObj
 
-
 @app.post('/login')
 def login( req: LoginRequest ):
 	''' handle request of login with rest api
@@ -79,6 +78,7 @@ def login( req: LoginRequest ):
 
 	return {
 		'token': token,
+		'user_id': userObj.userId.hex(),
 		'username': req.username,
 		'is_admin': userObj.isAdmin,
 	}
@@ -105,7 +105,7 @@ def getAppointments(authorization: str = Header(None)):
 	appointmentResponseDictList = list()
 	for appointment in appointmentList:
 		appointmentResponseDictList.append({
-			'appointmentId': appointment.appointmentId,
+			'appointmentId': appointment.appointmentId.hex(),
 			'user': appointment.user.username,
 			'slot': appointment.slot,
 		})
@@ -120,18 +120,18 @@ def updateAppointment(
 ):
 	userObj = getUserFromAuthorization(authorization)
 
-	appointment = DbConnectionObj.getAppointmentById( appointmentId )
+	appointment = DbConnectionObj.getAppointmentById( bytes.fromhex(appointmentId) )
 
 	if not appointment:
 		raise HTTPException(status_code=404, detail='Appointment not found')
 
-	if not userObj.isAdmin and appointment.user != userObj:
+	if not userObj.isAdmin and appointment.user.userId != userObj.userId:
 		raise HTTPException(status_code=403, detail='Forbidden')
 
 	appointment.slot = req.slot
 
 	return {
-		'appointmentId': appointment.appointmentId,
+		'appointmentId': appointment.appointmentId.hex(),
 		'user': appointment.user.username,
 		'slot': appointment.slot,
 	}
@@ -140,12 +140,12 @@ def updateAppointment(
 def deleteAppointment(appointmentId: str, authorization: str = Header(None)):
 	userObj = getUserFromAuthorization(authorization)
 
-	appointment = DbConnectionObj.getAppointmentById( appointmentId )
+	appointment = DbConnectionObj.getAppointmentById( bytes.fromhex(appointmentId) )
 
 	if not appointment:
 		raise HTTPException(status_code=404, detail='Appointment not found')
 
-	if not userObj.isAdmin and appointment.user != userObj:
+	if not userObj.isAdmin and appointment.user.userId != userObj.userId:
 		raise HTTPException(status_code=403, detail='Forbidden')
 
 	DbConnectionObj.deleteAppointment( appointment )
