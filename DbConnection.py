@@ -37,6 +37,8 @@ class DbConnection:
         self.tokenToUserInfoDict: dict[str, UserModel] = dict()
         self.appointmentIdToAppointmentDict: dict[bytes, Appointment] = dict()
 
+        self.mock()
+
     def mock(self):
         adminId = uuid4().bytes
         user1 = uuid4().bytes
@@ -60,6 +62,11 @@ class DbConnection:
     def updateUserToken( self, user: UserModel, token: str ):
         tokenTimeout = time.time() + TokenPeriod_secs
         tokenObj = Token( token, tokenTimeout )
+
+        # remove old token
+        if user.token is not None and user.token.token in self.tokenToUserInfoDict:
+            self.tokenToUserInfoDict.pop(user.token.token)
+
         user.token = tokenObj
 
         self.tokenToUserInfoDict[ token ] = user

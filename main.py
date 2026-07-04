@@ -47,14 +47,12 @@ DbConnectionObj = DbConnection()
 DbConnectionObj.createUser( b'admin-id', 'admin', 'admin123', isAdmin=True )
 DbConnectionObj.createUser( b'user-id', 'user', 'user123', isAdmin=False )
 
-
 def getUserFromAuthorization( authorization: str = Header(None) ):
 	if not authorization:
 		raise HTTPException(status_code=401, detail='Missing token')
 
 	token = authorization.replace('Bearer ', '')
 	userObj = DbConnectionObj.getUserFromToken( token )
-
 	if not userObj:
 		raise HTTPException(status_code=401, detail='Invalid token')
 
