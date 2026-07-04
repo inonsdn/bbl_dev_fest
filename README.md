@@ -10,3 +10,9 @@ run backend with
 ```
 ./run.sh
 ```
+
+test with command line
+
+```
+./test_script.sh
+```
